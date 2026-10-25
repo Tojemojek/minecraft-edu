@@ -51,8 +51,8 @@ Nie kręć myszką w trakcie budowania. „Do przodu” zmienia się razem z two
 
 ## Lekcje
 
-Jeden bok ogrodzenia: [plot](../lekcje/plot.md)
+Jeden bok ogrodzenia: [płot](../lekcje/00_01_plot.md)
 
-Całe ogrodzenie: [ogrod](../lekcje/ogrod.md)
+Całe ogrodzenie: [ogród](../lekcje/00_02_ogrod.md)
 
-Ogrodzenie zrobione przez agenta: [ogrod-agent](../lekcje/ogrod-agent.md)
+Ogrodzenie zrobione przez agenta: [ogród robiony przez agenta](../lekcje/00_03_ogrod-agent.md)

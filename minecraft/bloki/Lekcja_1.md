@@ -1,6 +1,6 @@
 # Domek
 
-Lekcja: [domek](../lekcje/domek.md)
+Lekcja: [domek](../lekcje/01_01_domek.md)
 
 `blocks.fill` wypełnia prostokąt od jednego rogu do drugiego. `FillOperation.REPLACE` zamienia bloki, które tam już
 stoją.
