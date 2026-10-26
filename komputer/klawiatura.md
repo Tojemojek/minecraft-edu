@@ -18,6 +18,14 @@ Na zdjęciu jest laptop ThinkPad. Kolorowe strzałki pokazują klawisze z tej le
 - Strzałka JASNOZIELONA wskazuje **Alt**. Po klawiszu z okienkiem, tuż przed spacją. Też służy do skrótów.
 - Strzałka CZERWONA wskazuje **spację**. Długi klawisz na dole, na środku. Nie ma na nim napisu. Robi odstęp między słowami.
 
+## Caps Lock, Tab i okienko
+
+Szukaj napisu albo znaczka na klawiszu.
+
+- **Caps Lock**. Nad lewym Shiftem. Naciśniesz raz — litery wychodzą wielkie bez trzymania Shifta. Naciśniesz drugi raz — znowu są małe. Jeśli litery same robią się wielkie, naciśnij Caps Lock jeszcze raz.
+- **Tab**. Nad Caps Lock, przed literą Q. Na klawiszu są dwie strzałki. W tekście robi większy odstęp niż spacja.
+- **Klawisz ze znaczkiem Windows**. Między Ctrl a Alt. Znaczek wygląda jak okienko. Otwiera listę programów. Sam nie pisze litery. Dziś tylko go znajdź.
+
 ## Małpa i podłoga
 
 Małpa to znak `@`. Podłoga to znak `_`. Przykłady zrobimy później.
@@ -33,5 +41,6 @@ Skrót to dwa klawisze naraz. Trzymasz pierwszy, stukasz drugi, puszczasz oba. D
 - **Ctrl + V** — wklej. Czekająca kopia pojawia się przy kursorze.
 - **Ctrl + X** — wytnij. Tekst znika z miejsca, ale kopia czeka. Potem można ją wkleić gdzie indziej.
 - **Alt + F4** — zamknij okno. Alt to klawisz przy spacji, strzałka KOLOR. F4 to czwarty klawisz w bloku F: liczysz F1, F2, F3, F4. Nie myl Alt z Fn.
+- **Alt + Tab** — przełącz okno. Trzymasz Alt i stukasz Tab. Na ekranie widać otwarte okna. Puszczasz Alt — zostajesz w oknie z jasną ramką. Okno się nie zamyka.
 
 Jeśli okno nie znika, przytrzymaj też Fn: Alt, Fn i F4.
