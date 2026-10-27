@@ -15,17 +15,20 @@ def zbuduj_ogrod_agent():
     szerokosc = 15
     dlugosc = 10
     agent.teleport_to_player()
-    agent.set_assist(PLACE_ON_MOVE, False)
     agent.move(FORWARD, 3)
     agent.set_item(OAK_FENCE, 64, 1)
     agent.set_slot(1)
-    agent.set_assist(PLACE_ON_MOVE, True)
-    for krok in range(2):
-        agent.move(FORWARD, szerokosc)
+    for a in range(2):
+        for szer in range(szerokosc):
+            agent.move(FORWARD, 1)
+            agent.place(BACK)
+
         agent.turn(TurnDirection.LEFT)
-        agent.move(FORWARD, dlugosc)
+
+        for dl in range(dlugosc):
+            agent.move(FORWARD, 1)
+            agent.place(BACK)
         agent.turn(TurnDirection.LEFT)
-    agent.set_assist(PLACE_ON_MOVE, False)
 
 player.on_chat("ogrod_agent", zbuduj_ogrod_agent)
 ```
