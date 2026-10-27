@@ -11,7 +11,7 @@ Popatrz w stronę dłuższego boku, zanim wpiszesz komendę. Potem agent idzie s
 Wklej to w Code Builderze zamiast poprzedniego programu. Nie uruchamiaj go przez `python3`. Zostaw wcięcia.
 
 ```python
-def zbuduj_ogrod():
+def zbuduj_ogrod_agent():
     szerokosc = 15
     dlugosc = 10
     agent.teleport_to_player()
@@ -27,7 +27,7 @@ def zbuduj_ogrod():
         agent.turn(TurnDirection.LEFT)
     agent.set_assist(PLACE_ON_MOVE, False)
 
-player.on_chat("ogrod", zbuduj_ogrod)
+player.on_chat("ogrod_agent", zbuduj_ogrod_agent)
 ```
 
 `szerokosc` i `dlugosc` to dwa pudełka na liczby. Agent stawia jeden słupek na każdy krok. Idzie 15 kroków, skręca w lewo, idzie 10 kroków, skręca. Pętla robi tę parę boków dwa razy. Wychodzi prostokąt.

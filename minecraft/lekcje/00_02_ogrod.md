@@ -26,18 +26,16 @@ def zbuduj_ogrod():
     szerokosc = 15
     dlugosc = 10
     for krok in range(szerokosc):
-        blocks.place(OAK_FENCE, pos_local(krok, 0, 2))
-        blocks.place(OAK_FENCE, pos_local(krok, 0, 2 + dlugosc - 1))
+        blocks.place(OAK_FENCE, pos(krok, 0, 2))
+        blocks.place(OAK_FENCE, pos(krok, 0, 2 + dlugosc - 1))
     for krok in range(dlugosc):
-        blocks.place(OAK_FENCE, pos_local(0, 0, 2 + krok))
-        blocks.place(OAK_FENCE, pos_local(szerokosc - 1, 0, 2 + krok))
+        blocks.place(OAK_FENCE, pos(0, 0, 2 + krok))
+        blocks.place(OAK_FENCE, pos(szerokosc - 1, 0, 2 + krok))
 
 player.on_chat("ogrod", zbuduj_ogrod)
 ```
 
 `OAK_FENCE` to ten sam płot z dębu.
-
-`pos_local` liczy od twojego wzroku, nie od wschodu i północy. Dlatego jest łatwiejsze: pierwsza liczba to w lewo, druga w górę, trzecia do przodu. Dwa bloki na końcu odsuwają ogrodzenie do przodu, żeby nie stanęło na tobie. Patrz w jedną stronę, aż program skończy. Jak kręcisz myszką, „do przodu” też się kręci.
 
 ## Jak uruchomić
 

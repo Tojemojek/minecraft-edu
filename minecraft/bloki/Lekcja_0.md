@@ -37,17 +37,17 @@ for krok in range(10):
 
 `krok` liczy pętla. Tego pudełka nie zakładasz sam.
 
-## pos_local(x, y, z)
+## pos(x, y, z)
 
-`pos_local(x, y, z)` mówi, gdzie postawić blok. Liczy od ciebie, od strony, w którą patrzysz.
+`pos(x, y, z)` mówi, gdzie postawić blok. Liczy względem kierunków świata. 
 
-- `x` to w lewo albo w prawo. Większa niż zero idzie w lewo. Mniejsza niż zero idzie w prawo. Zero zostawia cię na miejscu.
-- `y` to w górę albo w dół. Większa niż zero idzie w górę. Mniejsza niż zero idzie w dół. Zero to wysokość twoich stóp.
-- `z` to do przodu albo do tyłu. Większa niż zero idzie do przodu. Mniejsza niż zero idzie do tyłu.
+- x - to wschód / zachód 
+- y - to góra / dół 
+- z - to południe, północ
 
-`pos_local` liczy od twojego wzroku. Obracasz się, patrzysz na miejsce budowy i liczby pasują do tego, co widzisz.
+Zanim zaczniesz budować - ustaw się twarzą na południe.
 
-Nie kręć myszką w trakcie budowania. „Do przodu” zmienia się razem z twoim wzrokiem.
+Nie poruszaj się w czasie budowania. To zmieni punkt od którego liczone są współrzędne.
 
 ## Lekcje
 

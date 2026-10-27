@@ -1,6 +1,6 @@
 # Domek z sześciu ścian
 
-Zbudujesz mały domek. Każda ściana jest z innego materiału. Teoria o `pos_local` jest w [bloki/plot.md](../bloki/plot.md). Nazwy bloków z tej lekcji są w [bloki/domek.md](../bloki/domek.md).
+Zbudujesz mały domek. Każda ściana jest z innego materiału. Teoria o `pos` jest w [bloki/plot.md](../bloki/plot.md). Nazwy bloków z tej lekcji są w [bloki/domek.md](../bloki/domek.md).
 
 Domek staje przed tobą. Nie kręć myszką, dopóki się nie zbuduje.
 
@@ -10,16 +10,16 @@ Wklej to w Code Builderze. Zostaw wcięcia.
 
 ```python
 def zbuduj_domek():
-    blocks.fill(PLANKS_OAK, pos_local(-3, -1, 3), pos_local(3, -1, 8), FillOperation.REPLACE)
-    blocks.fill(PLANKS_SPRUCE, pos_local(-3, 3, 3), pos_local(3, 3, 8), FillOperation.REPLACE)
-    blocks.fill(STONE_BRICKS, pos_local(-3, 0, 8), pos_local(3, 2, 8), FillOperation.REPLACE)
-    blocks.fill(PLANKS_BIRCH, pos_local(3, 0, 3), pos_local(3, 2, 8), FillOperation.REPLACE)
-    blocks.fill(SANDSTONE, pos_local(-3, 0, 3), pos_local(-3, 2, 8), FillOperation.REPLACE)
-    blocks.fill(BRICKS, pos_local(-3, 0, 3), pos_local(3, 2, 3), FillOperation.REPLACE)
-    blocks.fill(AIR, pos_local(0, 0, 3), pos_local(0, 1, 3), FillOperation.REPLACE)
-    blocks.place(OAK_DOOR, pos_local(0, 0, 3))
-    blocks.fill(AIR, pos_local(3, 1, 5), pos_local(3, 2, 6), FillOperation.REPLACE)
-    blocks.fill(AIR, pos_local(-3, 1, 5), pos_local(-3, 2, 6), FillOperation.REPLACE)
+    blocks.fill(PLANKS_OAK, pos(-3, -1, 3), pos(3, -1, 8), FillOperation.REPLACE)
+    blocks.fill(PLANKS_SPRUCE, pos(-3, 3, 3), pos(3, 3, 8), FillOperation.REPLACE)
+    blocks.fill(STONE_BRICKS, pos(-3, 0, 8), pos(3, 2, 8), FillOperation.REPLACE)
+    blocks.fill(PLANKS_BIRCH, pos(3, 0, 3), pos(3, 2, 8), FillOperation.REPLACE)
+    blocks.fill(SANDSTONE, pos(-3, 0, 3), pos(-3, 2, 8), FillOperation.REPLACE)
+    blocks.fill(BRICKS, pos(-3, 0, 3), pos(3, 2, 3), FillOperation.REPLACE)
+    blocks.fill(AIR, pos(0, 0, 3), pos(0, 1, 3), FillOperation.REPLACE)
+    blocks.place(OAK_DOOR, pos(0, 0, 3))
+    blocks.fill(AIR, pos(3, 1, 5), pos(3, 2, 6), FillOperation.REPLACE)
+    blocks.fill(AIR, pos(-3, 1, 5), pos(-3, 2, 6), FillOperation.REPLACE)
 
 player.on_chat("domek", zbuduj_domek)
 ```
@@ -63,16 +63,16 @@ def zbuduj_domek2():
     przod = 3
     tyl = przod + glebokosc - 1
     srodek = przod + glebokosc // 2
-    blocks.fill(PLANKS_OAK, pos_local(-szer, -1, przod), pos_local(szer, -1, tyl), FillOperation.REPLACE)
-    blocks.fill(PLANKS_SPRUCE, pos_local(-szer, wys, przod), pos_local(szer, wys, tyl), FillOperation.REPLACE)
-    blocks.fill(STONE_BRICKS, pos_local(-szer, 0, tyl), pos_local(szer, wys - 1, tyl), FillOperation.REPLACE)
-    blocks.fill(PLANKS_BIRCH, pos_local(szer, 0, przod), pos_local(szer, wys - 1, tyl), FillOperation.REPLACE)
-    blocks.fill(SANDSTONE, pos_local(-szer, 0, przod), pos_local(-szer, wys - 1, tyl), FillOperation.REPLACE)
-    blocks.fill(BRICKS, pos_local(-szer, 0, przod), pos_local(szer, wys - 1, przod), FillOperation.REPLACE)
-    blocks.fill(AIR, pos_local(0, 0, przod), pos_local(0, 1, przod), FillOperation.REPLACE)
-    blocks.place(OAK_DOOR, pos_local(0, 0, przod))
-    blocks.fill(AIR, pos_local(szer, 1, srodek - 1), pos_local(szer, wys - 1, srodek), FillOperation.REPLACE)
-    blocks.fill(AIR, pos_local(-szer, 1, srodek - 1), pos_local(-szer, wys - 1, srodek), FillOperation.REPLACE)
+    blocks.fill(PLANKS_OAK, pos(-szer, -1, przod), pos(szer, -1, tyl), FillOperation.REPLACE)
+    blocks.fill(PLANKS_SPRUCE, pos(-szer, wys, przod), pos(szer, wys, tyl), FillOperation.REPLACE)
+    blocks.fill(STONE_BRICKS, pos(-szer, 0, tyl), pos(szer, wys - 1, tyl), FillOperation.REPLACE)
+    blocks.fill(PLANKS_BIRCH, pos(szer, 0, przod), pos(szer, wys - 1, tyl), FillOperation.REPLACE)
+    blocks.fill(SANDSTONE, pos(-szer, 0, przod), pos(-szer, wys - 1, tyl), FillOperation.REPLACE)
+    blocks.fill(BRICKS, pos(-szer, 0, przod), pos(szer, wys - 1, przod), FillOperation.REPLACE)
+    blocks.fill(AIR, pos(0, 0, przod), pos(0, 1, przod), FillOperation.REPLACE)
+    blocks.place(OAK_DOOR, pos(0, 0, przod))
+    blocks.fill(AIR, pos(szer, 1, srodek - 1), pos(szer, wys - 1, srodek), FillOperation.REPLACE)
+    blocks.fill(AIR, pos(-szer, 1, srodek - 1), pos(-szer, wys - 1, srodek), FillOperation.REPLACE)
 
 player.on_chat("domek2", zbuduj_domek2)
 ```

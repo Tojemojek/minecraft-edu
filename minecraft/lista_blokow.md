@@ -8,11 +8,11 @@ Jeśli nazwa nie działa, sprawdź ją w autouzupełnianiu Code Buildera.
 ## Jak używać
 
 ```python
-blocks.place(DIAMOND_BLOCK, pos_local(0, 0, 0))
-blocks.fill(GRASS, pos_local(0, 0, 0), pos_local(10, 0, 10))
+blocks.place(DIAMOND_BLOCK, pos(0, 0, 0))
+blocks.fill(GRASS, pos(0, 0, 0), pos(10, 0, 10))
 ```
 
-`pos_local` jest łatwiejsze niż `pos`. Liczy od tego, w którą stronę patrzysz: pierwsza liczba w lewo, druga w górę,
+`pos` jest łatwiejsze niż `pos`. Liczy od tego, w którą stronę patrzysz: pierwsza liczba w lewo, druga w górę,
 trzecia do przodu. `pos` liczy wschód i północ. Tego nie widać.
 
 ## Podstawowe
