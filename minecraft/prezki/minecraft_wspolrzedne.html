@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pl">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Współrzędne w Minecraft Education</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+				<section>
+					<h1>Współrzędne</h1>
+					<h3>Minecraft Education</h3>
+					<p><code>pos(a, b, c)</code></p>
+				</section>
+
+				<section>
+					<h2>pos(a, b, c)</h2>
+					<p>To miejsce liczone od Twoich stóp.</p>
+					<p><code>pos(0, 0, 0)</code> — Twoje stopy.</p>
+				</section>
+
+				<section>
+					<h2>Która liczba za co</h2>
+					<table>
+						<tr>
+							<th>liczba</th>
+							<th>plus</th>
+							<th>minus</th>
+						</tr>
+						<tr>
+							<td><code>a</code></td>
+							<td>wschód</td>
+							<td>zachód</td>
+						</tr>
+						<tr>
+							<td><code>b</code></td>
+							<td>góra</td>
+							<td>dół</td>
+						</tr>
+						<tr>
+							<td><code>c</code></td>
+							<td>południe</td>
+							<td>północ</td>
+						</tr>
+					</table>
+				</section>
+
+				<section>
+					<h2>Twarzą na północ</h2>
+					<ul>
+						<li>przed sobą — północ — minus <code>c</code></li>
+						<li>za sobą — południe — plus <code>c</code></li>
+						<li>po prawej — wschód — plus <code>a</code></li>
+						<li>po lewej — zachód — minus <code>a</code></li>
+						<li><code>b</code> — góra albo dół, niezależnie od twarzy</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Przykłady</h2>
+					<pre><code class="language-javascript" data-trim style="font-size: 0.7em;">blocks.place(GOLD_BLOCK, pos(0, 2, 0))      // dwa w górę, nad głową
+blocks.place(DIAMOND_BLOCK, pos(3, 0, 0))   // trzy na wschód
+blocks.place(IRON_BLOCK, pos(-2, 0, 0))     // dwa na zachód
+blocks.place(BLUE_WOOL, pos(0, 0, -3))      // trzy na północ, przed sobą
+blocks.place(RED_WOOL, pos(0, 0, 3))        // trzy na południe, za sobą
+blocks.place(STONE, pos(0, -1, 0))          // jeden w dół, pod stopami
+blocks.place(EMERALD_BLOCK, pos(2, 1, -1))  // 2 wschód, 1 góra, 1 północ</code></pre>
+				</section>
+
+				<section>
+					<h2>Kartka</h2>
+					<p><a href="minecraft_kartka.html">Otwórz kartkę</a></p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+		</script>
+
+	</body>
+</html>

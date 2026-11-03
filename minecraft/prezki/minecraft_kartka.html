@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="pl">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kartka współrzędnych</title>
+	<style>
+		body {
+			margin: 0;
+			min-height: 100vh;
+			background: #d9d3c5;
+			color: #222;
+			font-family: "Segoe UI", sans-serif;
+		}
+		.sheet {
+			width: max-content;
+			max-width: calc(100% - 16px);
+			margin: 16px auto;
+			padding: 16px 20px;
+			background: #fffef8;
+			border: 1px solid #cfc6b4;
+			box-shadow: 0 8px 24px rgba(0, 0, 0, .15);
+			overflow-x: auto;
+		}
+		h1 {
+			margin: 0 0 8px;
+			font-size: 1.4rem;
+		}
+		.form {
+			display: flex;
+			gap: 16px;
+			flex-wrap: wrap;
+			align-items: flex-end;
+			margin: 12px 0;
+		}
+		label {
+			font-size: 1.05rem;
+			font-weight: 700;
+		}
+		label small {
+			display: block;
+			font-weight: 500;
+		}
+		input {
+			font-size: 1.6rem;
+			width: 5rem;
+			text-align: center;
+		}
+		button {
+			font-size: 1.3rem;
+			font-weight: 700;
+			padding: 0.35rem 1rem;
+			cursor: pointer;
+		}
+		#dodaj {
+			background: #f0b429;
+			border: 2px solid #111;
+		}
+		.a { color: #1565c0; }
+		.b { color: #6a1b9a; }
+		.c { color: #2e7d32; }
+		.board {
+			display: grid;
+			grid-template-columns: 72px auto 72px;
+			align-items: center;
+			justify-items: center;
+			gap: 6px;
+		}
+		.dir {
+			font-weight: 700;
+			text-align: center;
+			font-size: 0.85rem;
+		}
+		.paper {
+			display: grid;
+		}
+		.tick, .cell {
+			box-sizing: border-box;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.tick {
+			font-size: 8px;
+			color: #666;
+		}
+		.tick.a { color: #1565c0; }
+		.tick.c { color: #2e7d32; }
+		.cell {
+			position: relative;
+			border: 1px solid #d5d5d5;
+			background: #fff;
+		}
+		.cell.player {
+			background: #111;
+		}
+		.arrow {
+			position: absolute;
+			top: 2px;
+			left: 50%;
+			transform: translateX(-50%);
+			border-left: 4px solid transparent;
+			border-right: 4px solid transparent;
+			border-bottom: 7px solid #fff;
+		}
+		.cell.blok {
+			background: #f0b429;
+		}
+		.cell.player.blok {
+			background: #111;
+			box-shadow: inset 0 0 0 4px #f0b429;
+		}
+		.cell.lit {
+			outline: 2px solid #1565c0;
+			outline-offset: -2px;
+			z-index: 1;
+		}
+		.h {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			text-align: center;
+			font-size: 8px;
+			font-weight: 700;
+			line-height: 1;
+		}
+		.cell.player .h {
+			color: #f0b429;
+		}
+		#opis {
+			font-size: 1.05rem;
+			margin: 8px 0;
+		}
+		.kod-box {
+			margin-top: 12px;
+		}
+		.kod-box label {
+			display: block;
+			margin-bottom: 6px;
+		}
+		#kod {
+			display: block;
+			width: 100%;
+			min-height: 7rem;
+			box-sizing: border-box;
+			font-family: ui-monospace, monospace;
+			font-size: 1rem;
+			padding: 8px;
+		}
+		.poza {
+			color: #b00020;
+			font-weight: 700;
+		}
+	</style>
+</head>
+<body>
+	<div class="sheet">
+		<h1>Kartka — widok z góry</h1>
+		<p>Czarny klocek to Ty. Trójkąt pokazuje twarz: północ. Niebieska ramka to podgląd, złoty klocek zostaje po „Dodaj”.</p>
+		<div class="form">
+			<label class="a">a
+				<small>wschód + / zachód −</small>
+				<input id="a" type="number" value="0">
+			</label>
+			<label class="b">b
+				<small>góra + / dół −</small>
+				<input id="b" type="number" value="0">
+			</label>
+			<label class="c">c
+				<small>południe + / północ −</small>
+				<input id="c" type="number" value="0">
+			</label>
+			<button id="dodaj" type="button">Dodaj</button>
+			<button id="cofnij" type="button">Cofnij ostatnie</button>
+			<button id="wyczysc" type="button">Wyczyść</button>
+		</div>
+		<div class="board">
+			<div></div>
+			<div class="dir c">PÓŁNOC<br>minus c</div>
+			<div></div>
+			<div class="dir a">ZACHÓD<br>minus a</div>
+			<div id="paper" class="paper"></div>
+			<div class="dir a">WSCHÓD<br>plus a</div>
+			<div></div>
+			<div class="dir c">POŁUDNIE<br>plus c</div>
+			<div></div>
+		</div>
+		<p id="opis"></p>
+		<div class="kod-box">
+			<label for="kod">Kod do skopiowania</label>
+			<textarea id="kod" readonly></textarea>
+			<button id="kopiuj" type="button">Kopiuj</button>
+		</div>
+	</div>
+	<script>
+		const N = 15;
+		const CELL = 26;
+		const paper = document.getElementById("paper");
+		const cells = {};
+		const bloki = {};
+		const dodane = [];
+
+		paper.style.gridTemplateColumns = "32px repeat(" + (N * 2 + 1) + ", " + CELL + "px)";
+		paper.style.gridTemplateRows = "14px repeat(" + (N * 2 + 1) + ", " + CELL + "px)";
+
+		paper.appendChild(document.createElement("div"));
+		for (let x = -N; x <= N; x++) {
+			const tick = document.createElement("div");
+			tick.className = "tick a";
+			tick.textContent = x % 5 === 0 ? x : "";
+			paper.appendChild(tick);
+		}
+		for (let z = -N; z <= N; z++) {
+			const tick = document.createElement("div");
+			tick.className = "tick c";
+			tick.textContent = z % 5 === 0 ? z : "";
+			paper.appendChild(tick);
+			for (let x = -N; x <= N; x++) {
+				const cell = document.createElement("div");
+				cell.className = "cell";
+				const h = document.createElement("span");
+				h.className = "h";
+				if (x === 0 && z === 0) {
+					cell.classList.add("player");
+					const arrow = document.createElement("span");
+					arrow.className = "arrow";
+					cell.appendChild(arrow);
+				}
+				cell.appendChild(h);
+				paper.appendChild(cell);
+				cells[x + "," + z] = cell;
+			}
+		}
+
+		function readInt(id) {
+			const raw = document.getElementById(id).value.trim();
+			if (!/^-?\d+$/.test(raw)) return null;
+			return parseInt(raw, 10);
+		}
+
+		function kierunek(n, plus, minus) {
+			if (n > 0) return plus;
+			if (n < 0) return minus;
+			return "zero";
+		}
+
+		function maluj() {
+			Object.values(cells).forEach(function (cell) {
+				cell.classList.remove("lit", "blok");
+				cell.querySelector(".h").textContent = "";
+			});
+			Object.keys(bloki).forEach(function (key) {
+				const cell = cells[key];
+				if (!cell) return;
+				cell.classList.add("blok");
+				cell.querySelector(".h").textContent = bloki[key].join(",");
+			});
+			const a = readInt("a");
+			const b = readInt("b");
+			const c = readInt("c");
+			const opis = document.getElementById("opis");
+			if (a === null || b === null || c === null) {
+				opis.textContent = "Wpisz trzy liczby całkowite.";
+				opis.className = "poza";
+				return;
+			}
+			opis.className = "";
+			opis.textContent = "a: " + kierunek(a, "wschód", "zachód")
+				+ " · b: " + kierunek(b, "góra", "dół")
+				+ " · c: " + kierunek(c, "południe", "północ");
+			const cell = cells[a + "," + c];
+			if (!cell) {
+				opis.textContent += " — poza kartką (od -15 do 15).";
+				opis.className = "poza";
+				return;
+			}
+			cell.classList.add("lit");
+		}
+
+		function dodaj() {
+			const a = readInt("a");
+			const b = readInt("b");
+			const c = readInt("c");
+			if (a === null || b === null || c === null) return;
+			if (a < -N || a > N || c < -N || c > N) return;
+			const key = a + "," + c;
+			if (!bloki[key]) bloki[key] = [];
+			if (bloki[key].indexOf(b) === -1) {
+				bloki[key].push(b);
+				dodane.push({ a: a, b: b, c: c });
+			}
+			zapiszKod();
+			maluj();
+		}
+
+		function zapiszKod() {
+			document.getElementById("kod").value = dodane.map(function (p) {
+				return "blocks.place(GOLD_BLOCK, pos(" + p.a + ", " + p.b + ", " + p.c + "))";
+			}).join("\n");
+		}
+
+		function cofnij() {
+			const ostatni = dodane.pop();
+			if (!ostatni) return;
+			const key = ostatni.a + "," + ostatni.c;
+			const wysokosci = bloki[key];
+			if (wysokosci) {
+				const i = wysokosci.indexOf(ostatni.b);
+				if (i !== -1) wysokosci.splice(i, 1);
+				if (wysokosci.length === 0) delete bloki[key];
+			}
+			zapiszKod();
+			maluj();
+		}
+
+		function wyczysc() {
+			Object.keys(bloki).forEach(function (key) {
+				delete bloki[key];
+			});
+			dodane.length = 0;
+			document.getElementById("kod").value = "";
+			maluj();
+		}
+
+		function kopiuj() {
+			const pole = document.getElementById("kod");
+			const tekst = pole.value;
+			if (!tekst) return;
+			pole.focus();
+			pole.select();
+			function oznacz() {
+				const btn = document.getElementById("kopiuj");
+				btn.textContent = "Skopiowane";
+				setTimeout(function () { btn.textContent = "Kopiuj"; }, 1200);
+			}
+			if (navigator.clipboard && navigator.clipboard.writeText) {
+				navigator.clipboard.writeText(tekst).then(oznacz).catch(function () {
+					document.execCommand("copy");
+					oznacz();
+				});
+			} else {
+				document.execCommand("copy");
+				oznacz();
+			}
+		}
+
+		["a", "b", "c"].forEach(function (id) {
+			const input = document.getElementById(id);
+			input.addEventListener("input", maluj);
+			input.addEventListener("keydown", function (event) {
+				if (event.key === "Enter") dodaj();
+			});
+		});
+		document.getElementById("dodaj").addEventListener("click", dodaj);
+		document.getElementById("cofnij").addEventListener("click", cofnij);
+		document.getElementById("wyczysc").addEventListener("click", wyczysc);
+		document.getElementById("kopiuj").addEventListener("click", kopiuj);
+		maluj();
+	</script>
+</body>
+</html>
