@@ -31,26 +31,23 @@ def okna():
 def dach():
     blocks.fill(PLANKS_OAK, pos(lewa, wysokosc, przod), pos(prawa, wysokosc, tyl), FillOperation.REPLACE)
 
-
-def schody():
-    for i in range(5):
-        blocks.place(CHERRY_STAIRS, pos(przod+i, i, lewa -1))
-    
 def schody2():
-    h = 0
-    for i in range(4):
-        blocks.place(CHERRY_STAIRS, pos(przod+i, i, lewa -1))
-    for j in range(4):
-        blocks.place(CHERRY_STAIRS, pos(7, j+4, lewa - j))
-
+    agent.teleport(pos(0,0,0), SOUTH)
+    agent.set_item(CHERRY_STAIRS, 64, 1)
+    agent.set_slot(1)
+    for j in range (4):
+        for i in range (4):
+            agent.place(FORWARD)
+            agent.move(UP, 1)
+            agent.move(FORWARD, 1)
+        agent.turn(TurnDirection.LEFT)
 
 def caly_dom():
     sciany();
     drzwi();
     okna();
     dach();
-    schody();
-
+    schody2();
 
 
 player.on_chat("dom", caly_dom)
